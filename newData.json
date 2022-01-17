@@ -12,14 +12,74 @@
         "point_group": "-3m",
         "crystal_system": "Trigonal"
       },
-      "unit_cell_parameter": {
-        "lattice_a": "5.378",
-        "lattice_b": "5.378",
-        "lattice_c": "5.378",
-        "alpha": "60.126",
-        "beta": "60.126",
-        "gamma": "60.126"
-      },
+      "unit_cell_parameter": [
+        {
+          "matter": "Fe0.0",
+          "data": {
+            "lattice_a": "5.378",
+            "lattice_b": "5.378",
+            "lattice_c": "5.378",
+            "alpha": "60.126",
+            "beta": "60.126",
+            "gamma": "60.126"
+          }
+        },
+        {
+          "matter": "Fe0.025",
+          "data": {
+            "lattice_a": "5.2",
+            "lattice_b": "5.2",
+            "lattice_c": "5.2",
+            "alpha": "60.126",
+            "beta": "60.126",
+            "gamma": "60.126"
+          }
+        },
+        {
+          "matter": "Fe0.05",
+          "data": {
+            "lattice_a": "5.2",
+            "lattice_b": "5.2",
+            "lattice_c": "5.2",
+            "alpha": "60.126",
+            "beta": "60.126",
+            "gamma": "60.126"
+          }
+        },
+        {
+          "matter": "Fe0.1",
+          "data": {
+            "lattice_a": "5.2",
+            "lattice_b": "5.2",
+            "lattice_c": "5.2",
+            "alpha": "60.126",
+            "beta": "60.126",
+            "gamma": "60.126"
+          }
+        },
+        {
+          "matter": "Fe0.15",
+          "data": {
+            "lattice_a": "5.2",
+            "lattice_b": "5.2",
+            "lattice_c": "5.2",
+            "alpha": "60.126",
+            "beta": "60.126",
+            "gamma": "60.126"
+          }
+        },
+        {
+          "matter": "Fe0.2",
+          "data": {
+            "lattice_a": "5.2",
+            "lattice_b": "5.2",
+            "lattice_c": "5.2",
+            "alpha": "60.126",
+            "beta": "60.126",
+            "gamma": "60.126"
+          }
+        }
+      ],
       "atom_position": {
         "name": "co sn s",
         "number": "3 2 2",
