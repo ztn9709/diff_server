@@ -9,11 +9,24 @@ let router = express.Router()
 router.post('/api/material', (req, res) => {
   const form = new formidable.IncomingForm()
   form.parse(req, async (err, fields, files) => {
-    if (fields.searchWay === 'exact') {
+    if (!err) {
       let elements = fields.elements.split(',')
-      let data = await Material.find({ mid: 'MAT001' })
-      data = JSON.parse(JSON.stringify(data))
-      console.log(data[0].elements, elements)
+      let data = await Material.find()
+      data = data.filter(item => {
+        if (fields.searchWay === 'exact') {
+          if (item.elements.length === elements.length) {
+            return elements.every(ele => {
+              return item.elements.includes(ele)
+            })
+          } else {
+            return false
+          }
+        } else {
+          return elements.every(ele => {
+            return item.elements.includes(ele)
+          })
+        }
+      })
       res.send(data)
     } else {
       res.status(404).send('404 Not Found')
@@ -21,12 +34,14 @@ router.post('/api/material', (req, res) => {
   })
 })
 router.get('/api/material', async (req, res) => {
-  if (req.query.formula === 'Co3Sn2S2') {
-    const data = await thenFs.readFile('./newData.json', 'utf8')
-    res.send(data)
-  } else {
-    res.status(404).send('404 Not Found')
-  }
+  // if (req.query.mid === 'MAT001') {
+  //   const data = await thenFs.readFile('./newData.json', 'utf8')
+  //   res.send(data)
+  // } else {
+  //   res.status(404).send('404 Not Found')
+  // }
+  const data = await Material.findOne({ mid: req.query.mid })
+  res.send(data)
 })
 // router.get('/api/search', async (req, res) => {
 //   const data = JSON.parse(await thenFs.readFile('./CoFeSnS.json', 'utf8'))
