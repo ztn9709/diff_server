@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-mongoose.connect('mongodb://localhost/magnetic')
+mongoose.connect('mongodb://localhost/web_demo')
 // const paperSchema = new Schema({
 //   title: {
 //     type: String,
@@ -48,5 +48,11 @@ mongoose.connect('mongodb://localhost/magnetic')
 //   }
 // })
 // const Class = mongoose.model('Class', classSchema)
+const materialSchema = new Schema({
+  mid: {
+    type: String
+  }
+})
+const Material = mongoose.model('Material', materialSchema)
 
-module.exports = {}
+module.exports = Material

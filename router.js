@@ -1,16 +1,19 @@
 const express = require('express')
 const thenFs = require('then-fs')
 const formidable = require('formidable')
-const fs = require('fs')
+const Material = require('./mongoose.js')
 
 //创建路由容器
 let router = express.Router()
 
-router.post('/api/search', (req, res) => {
+router.post('/api/material', (req, res) => {
   const form = new formidable.IncomingForm()
   form.parse(req, async (err, fields, files) => {
-    if (fields.formula === 'Co3Sn2S2') {
-      const data = await thenFs.readFile('./newData.json', 'utf8')
+    if (fields.searchWay === 'exact') {
+      let elements = fields.elements.split(',')
+      let data = await Material.find({ mid: 'MAT001' })
+      data = JSON.parse(JSON.stringify(data))
+      console.log(data[0].elements, elements)
       res.send(data)
     } else {
       res.status(404).send('404 Not Found')

@@ -5,7 +5,9 @@
     },
     "id": 1,
     "formula": "Co3Sn2S2",
-    "exactFormula": "Co3-xFexSn2S2",
+    "elements": ["Co", "Sn", "S"],
+    "inpurity_elements": ["Fe"],
+    "exact_formula": "Co3-xFexSn2S2",
     "structure": {
       "symmetry": {
         "space_group": "R-3m",
