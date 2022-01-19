@@ -9,7 +9,7 @@ router.post('/api/material', (req, res) => {
   const form = new formidable.IncomingForm()
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      res.status(500).send('Server error:' + err)
+      res.status(500).send('服务器出错:' + err)
       throw err
     }
     let elements = fields.elements.split(',')
@@ -27,7 +27,7 @@ router.post('/api/material', (req, res) => {
       })
       res.send(data)
     } catch (e) {
-      res.status(404).send('404 Not Found')
+      res.status(500).send('数据库查询出错:' + e)
       console.log('catch: ', e)
     }
   })
@@ -37,7 +37,7 @@ router.get('/api/material', async (req, res) => {
     const data = await Material.findOne({ mid: req.query.mid })
     res.send(data)
   } catch (e) {
-    res.status(404).send('404 Not Found')
+    res.status(500).send('数据库查询出错:' + e)
     console.log('catch: ', e)
   }
 })
