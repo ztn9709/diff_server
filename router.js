@@ -8,8 +8,12 @@ let router = express.Router()
 router.post('/api/material', (req, res) => {
   const form = new formidable.IncomingForm()
   form.parse(req, async (err, fields, files) => {
-    if (!err) {
-      let elements = fields.elements.split(',')
+    if (err) {
+      res.status(500).send('Server error:' + err)
+      throw err
+    }
+    let elements = fields.elements.split(',')
+    try {
       let data = await Material.find()
       data = data.filter(item => {
         let s = new Set([...item.elements, ...elements])
@@ -22,14 +26,20 @@ router.post('/api/material', (req, res) => {
         return false
       })
       res.send(data)
-    } else {
+    } catch (e) {
       res.status(404).send('404 Not Found')
+      console.log('catch: ', e)
     }
   })
 })
 router.get('/api/material', async (req, res) => {
-  const data = await Material.findOne({ mid: req.query.mid })
-  res.send(data)
+  try {
+    const data = await Material.findOne({ mid: req.query.mid })
+    res.send(data)
+  } catch (e) {
+    res.status(404).send('404 Not Found')
+    console.log('catch: ', e)
+  }
 })
 
 module.exports = router
