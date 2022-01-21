@@ -26,9 +26,9 @@ router.post('/api/material', (req, res) => {
         return false
       })
       res.send(data)
-    } catch (e) {
-      res.status(500).send('数据库查询出错:' + e)
-      console.log('catch: ', e)
+    } catch (err) {
+      res.status(500).send('数据库查询出错:' + err)
+      console.log('catch: ', err)
     }
   })
 })
@@ -36,9 +36,9 @@ router.get('/api/material', async (req, res) => {
   try {
     const data = await Material.findOne({ mid: req.query.mid })
     res.send(data)
-  } catch (e) {
-    res.status(500).send('数据库查询出错:' + e)
-    console.log('catch: ', e)
+  } catch (err) {
+    res.status(500).send('数据库查询出错:' + err)
+    console.log('catch: ', err)
   }
 })
 
