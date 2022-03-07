@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-mongoose.connect('mongodb://localhost/web_demo')
+mongoose.connect('mongodb://localhost/nonlinear')
 
 const materialSchema = new Schema({
-  mid: {
+  id: {
     type: String,
     required: true
   },
@@ -15,21 +15,15 @@ const materialSchema = new Schema({
     type: Array,
     required: true
   },
-  exact_formula: {
-    type: String,
-    required: true
-  },
-  inpurity_elements: {
-    type: Array,
-    required: true
-  },
-  structure: {
+  spacegroup: {
     type: Object,
     required: true
   },
-  results: {
-    type: Array,
-    required: true
+  soc_dos_gap: {
+    type: Number
+  },
+  nsoc_dos_gap: {
+    type: Number
   }
 })
 const Material = mongoose.model('Material', materialSchema)

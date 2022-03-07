@@ -16,4 +16,4 @@ server.use('/node_modules/', express.static('./node_modules/'))
 //挂载路由容器到服务中
 server.use(router)
 
-server.listen(4001)
+server.listen(4002)
