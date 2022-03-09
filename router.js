@@ -11,30 +11,22 @@ const noninversion = [
   215, 216, 217, 218, 219, 220
 ]
 
-router.post('/api/material', (req, res) => {
-  const form = new formidable.IncomingForm()
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      res.status(500).send('服务器出错:' + err)
-      throw err
-    }
-    let elements = fields.elements.split(',')
-    try {
-      let data = await Material.find({ elements: { $all: elements } })
-      data = data.filter(item => noninversion.includes(item.spacegroup.number))
-      if (fields.searchWay === 'exact') {
-        data = data.filter(item => item.elements.length === elements.length)
-      }
-      res.send(data)
-    } catch (err) {
-      res.status(500).send('数据库查询出错:' + err)
-      console.log('catch: ', err)
-    }
-  })
-})
 router.get('/api/material', async (req, res) => {
   try {
-    let data = await Material.findOne({ id: req.query.id })
+    let data = await Material.find({ elements: { $all: req.query.elements } })
+    data = data.filter(item => noninversion.includes(item.spacegroup.number))
+    if (req.query.searchWay === 'exact') {
+      data = data.filter(item => item.elements.length === req.query.elements.length)
+    }
+    res.send(data)
+  } catch (err) {
+    res.status(500).send('数据库查询出错:' + err)
+    console.log('catch: ', err)
+  }
+})
+router.get('/api/material/:id', async (req, res) => {
+  try {
+    let data = await Material.findOne({ id: req.params.id })
     data = JSON.parse(JSON.stringify(data))
     let src1 = __dirname + '/public/static/data/bandplot/bandplot_nsoc/' + data.mp_id + '.svg'
     let src2 = __dirname + '/public/static/data/bandplot/bandplot_soc/' + data.mp_id + '.svg'
