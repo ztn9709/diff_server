@@ -13,7 +13,7 @@ const noninversion = [
 
 router.get('/api/material', async (req, res) => {
   try {
-    let data = await Material.find({ elements: { $all: req.query.elements } })
+    let data = await Material.find({ elements: { $all: req.query.elements } }).sort({ id: 1 })
     data = data.filter(item => noninversion.includes(item.spacegroup.number))
     if (req.query.searchWay === 'exact') {
       data = data.filter(item => item.elements.length === req.query.elements.length)
