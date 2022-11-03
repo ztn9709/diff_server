@@ -1,12 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-mongoose.connect('mongodb://localhost/nonlinear')
+mongoose.connect('mongodb://127.0.0.1/diff')
 
 const materialSchema = new Schema({
-  id: {
-    type: String,
-    required: true
-  },
   formula: {
     type: String,
     required: true
@@ -15,17 +11,18 @@ const materialSchema = new Schema({
     type: Array,
     required: true
   },
-  spacegroup: {
-    type: Object,
+  nele: {
+    type: Number
+  },
+  cry_system: {
+    type: String,
     required: true
   },
-  soc_dos_gap: {
-    type: Number
-  },
-  nsoc_dos_gap: {
-    type: Number
+  Cu: {
+    type: Object,
+    required: true
   }
 })
-const Material = mongoose.model('Material', materialSchema)
+const Material = mongoose.model('XRD', materialSchema)
 
 module.exports = Material
